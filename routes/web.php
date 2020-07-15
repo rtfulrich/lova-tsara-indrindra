@@ -1,17 +1,11 @@
 <?php
 
+use App\CourseChapter;
+use App\Http\Livewire\Admin\EditChapterContent;
+use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// ---------------------------------------------------------------------- //
 
 Route::view('/', 'welcome')->name('home');
 
@@ -32,4 +26,54 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', 'Auth\LogoutController')->name('logout');
 
     Route::view('password/confirm', 'auth.passwords.confirm')->name('password.confirm');
+});
+
+/* --------------- ADMIN -------------------- */
+Route::middleware(['auth'])->group( function() {
+    Route::name('admin.')->group( function () {
+        Route::prefix('/admin')->group( function () {
+    
+            // Route::livewire('/dashboard', 'admin.dashboard')
+            //     ->name('dashboard')
+            //     ->layout('adminlte::page')
+            //     ->section('content');
+            Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+            // Route::livewire('/course/create', 'admin.new-course')
+            //     ->name('new-course')
+            //     ->layout('adminlte::page', ['ckeditor' => true])
+            //     ->section('content');
+            Route::get('/course/create', 'Admin\Courses\CourseController@create')->name('course.create');
+            Route::livewire('/course/{id}', 'admin.edit-course')
+                ->name('course.edit')
+                ->layout('layouts.admin')
+                ->section('content');
+            Route::livewire('/chapter/edit/{id}', 'admin.edit-chapter-content')
+                ->name('course.chapter.edit-content')
+                ->layout('layouts.admin')
+                ->section('content');
+
+            Route::post('/chapter/{id}/store-content', 'Admin\LarabergController@storeChapterContent')
+                ->name('course.chapter.store-content');
+            Route::put('/chapter/{id}/update-content', 'Admin\LarabergController@updateChapterContent')
+                ->name('course.chapter.update-content');
+
+            Route::livewire('/chapter/{id}', 'admin.show-chapter-content')
+                ->name('course.chapter.show-content')
+                ->layout('layouts.admin')
+                ->section('content');
+        });
+    });
+});
+
+Route::group(
+    ['prefix' => 'lti-course-filemanager', 'middleware' => ['web', 'auth']], 
+    function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    }
+);
+
+
+
+Route::get('phpinfo', function() {
+    phpinfo();
 });

@@ -5,13 +5,13 @@
         </a>
 
         <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 leading-9">
-            Register
+            Hisoratra
         </h2>
 
         <p class="mt-2 text-sm text-center text-gray-600 leading-5 max-w">
-            Or
+            Na
             <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                sign in to your account
+                miloge amy kaonty'nao
             </a>
         </p>
     </div>
@@ -20,22 +20,27 @@
         <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
             <form wire:submit.prevent="register">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 leading-5">
-                        Name
+                    <label for="username" class="block text-sm font-medium text-gray-700 leading-5">
+                        Username
                     </label>
 
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input wire:model.lazy="name" id="name" type="text" required autofocus class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" />
+                        <input 
+                            wire:model.lazy="username" 
+                            id="username" type="text" 
+                            class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('username') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red @enderror" 
+                            required autofocus
+                        />
                     </div>
 
-                    @error('name')
+                    @error('username')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="mt-6">
                     <label for="email" class="block text-sm font-medium text-gray-700 leading-5">
-                        Email address
+                        Adiresy Email
                     </label>
 
                     <div class="mt-1 rounded-md shadow-sm">
@@ -49,7 +54,7 @@
 
                 <div class="mt-6">
                     <label for="password" class="block text-sm font-medium text-gray-700 leading-5">
-                        Password
+                        Teny Miafina
                     </label>
 
                     <div class="mt-1 rounded-md shadow-sm">
@@ -74,7 +79,7 @@
                 <div class="mt-6">
                     <span class="block w-full rounded-md shadow-sm">
                         <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                            Register
+                            Hisoratra
                         </button>
                     </span>
                 </div>

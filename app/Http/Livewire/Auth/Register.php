@@ -10,32 +10,29 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    public $title = 'Register is bae';
-    /** @var string */
-    public $name = '';
+    
+    public $username = '';
 
-    /** @var string */
     public $email = '';
 
-    /** @var string */
     public $password = '';
 
-    /** @var string */
     public $passwordConfirmation = '';
 
+    
     public function register()
     {
         $this->validate([
-            'name' => ['required'],
+            'username' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'min:8', 'same:passwordConfirmation'],
         ]);
-
-        $user = User::create([
-            'email' => $this->email,
-            'name' => $this->name,
-            'password' => Hash::make($this->password),
-        ]);
+            // dd($this->username, $this->email, $this->password);
+        $user = new User();
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->password = Hash::make($this->password);
+        $user->save();
 
         $user->sendEmailVerificationNotification();
 

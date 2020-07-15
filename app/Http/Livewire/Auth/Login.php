@@ -8,13 +8,13 @@ use Livewire\Component;
 
 class Login extends Component
 {
-    /** @var string */
+
+    protected $listeners = ['logout'];
+    
     public $email = '';
 
-    /** @var string */
     public $password = '';
 
-    /** @var bool */
     public $remember = false;
 
     public function authenticate()
@@ -24,19 +24,19 @@ class Login extends Component
             'password' => ['required'],
         ]);
 
-        dd($this->email);
-
         if (!Auth::attempt($credentials, $this->remember)) {
             $this->addError('email', trans('auth.failed'));
 
             return;
+        } else {
+            if (Auth::user()->role === "superadmin") return redirect()->route('admin.dashboard');
         }
 
         redirect(route('home'));
     }
 
-    public function toSignUp() {
-        return redirect()->route("register");
+    public function logout() {
+        dd('logout');
     }
 
     public function render()
