@@ -1,32 +1,4 @@
 <div>
-
-    {{-- @if (!$showAddContentForm)
-        <i class="fa fa-plus fa-2x bg-green hover:bg-green-600 cursor-pointer p-2 px-3 rounded absolute top-0 right-0 z-30" title="Add a Content" wire:click="showAddContentForm"></i>
-    @else 
-        <div class="grid grid-cols-12 gap-4 mb-3 p-2 sticky top-14 bg-cool-gray-500 rounded border">
-            <div class="col-start-1 col-end-3">
-                <select wire:model="newContentType" class="bg-dark form-control h-full font-bold rounded text-center">
-                    <option class="text-lg">Content Type</option>
-                    <option value="title1">Title 1</option>
-                    <option value="title2">Title 2</option>
-                    <option value="title3">Title 3</option>
-                    <option value="paragraph">Paragraph</option>
-                    <option value="image">Image</option>
-                </select>
-            </div>
-            <div class="col-start-3 col-end-11">
-                <input type="text" wire:model.lazy="newChapterTitle" placeholder="Chapter Title" class="bg-dark form-control text-xl py-8 text-center px-2 rounded font-bold" autofocus>
-            </div>
-            <div class="col-start-11 col-end-13 flex justify-between align-items-center">
-                <button class="px-3 pt-3 pb-2 rounded bg-blue-600 hover:bg-blue-700" title="Save" wire:click="addChapter">
-                    <i class="fas fa-save fa-2x"></i>
-                </button>
-                <button class="px-3 pt-3 pb-2 rounded bg-red-600 hover:bg-red-700" wire:click="cancelAddNewChapter" title="Cancel">
-                    <i class="far fa-window-close fa-2x"></i>
-                </button>
-            </div>
-        </div>
-    @endif --}}
     
     <form action="{{ $alreadyExists ? 
         route('admin.course.chapter.update-content', $chapterId) : 

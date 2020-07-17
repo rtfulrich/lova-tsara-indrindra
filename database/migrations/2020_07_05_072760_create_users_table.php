@@ -18,10 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
+            $table->string('profile_picture')->default('default_profile_picture.png');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['superadmin', 'admin', 'teacher','student'])->default('student');
+            $table->string('roles')->default('student');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
         $user = new User();
         $user->email = 'rtfulrich@gmail.com';
         $user->username = 'tahirintsoa_ulrich';
-        $user->first_name = 'Tahirinstsoa';
+        $user->first_name = 'Tahirintsoa';
         $user->last_name = 'Ulrich';
         $user->password = Hash::make('qdndulti@10');
         $user->email_verified_at = now();
-        $user->role = 'superadmin';
+        $user->setRoles(['superadmin', 'admin', 'student', 'teacher']);
         $user->save();
     }
 }

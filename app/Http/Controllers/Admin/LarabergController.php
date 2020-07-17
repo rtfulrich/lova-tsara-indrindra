@@ -15,10 +15,8 @@ class LarabergController extends Controller
         $chapterContent = new ChapterContent();
         $chapterContent->content = $request->courseContent;
         $chapterContent->chapter_id = $id;
-        $saved = $chapterContent->save();
-        if ($saved) {
-            session()->flash('msg', 'Kontenan\' toko feno soamantsara');
-        }
+        $chapterContent->save();
+        session()->flash('msg', 'Kontenan\' toko feno soamantsara');
         return redirect()->route('admin.course.chapter.show-content', ChapterContent::latest()->first('id')->id);
     }
 

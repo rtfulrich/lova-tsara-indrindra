@@ -1,13 +1,12 @@
 <?php
 
-use App\CourseChapter;
-use App\Http\Livewire\Admin\EditChapterContent;
-use Illuminate\Http\Client\Request as ClientRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // ---------------------------------------------------------------------- //
 
-Route::view('/', 'welcome')->name('home');
+Route::livewire('/', 'website.welcome')
+    ->layout('layouts.app')
+    ->section('content')
+    ->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::view('login', 'auth.login')->name('login');
@@ -32,6 +31,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group( function() {
     Route::name('admin.')->group( function () {
         Route::prefix('/admin')->group( function () {
+            Route::get('/', fn() => redirect()->route('admin.dashboard'));
     
             // Route::livewire('/dashboard', 'admin.dashboard')
             //     ->name('dashboard')

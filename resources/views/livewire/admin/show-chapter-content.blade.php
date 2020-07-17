@@ -1,4 +1,4 @@
-<div class="p-4 bg-cool-gray-300 border-2 border-gray-700 mb-4 rounded-lg">
+<div class="p-4 bg-cool-gray-900 border-2 border-gray-700 mb-4 rounded-lg font-sans text-gray-400">
 
     @if (session()->has('msg') and $showFlashMsg)
         <div class="absolute top-0 right-0 p-4 bg-yellow-500 rounded z-50 font-bold text-lg cursor-pointer text-white" wire:click="removeFlashMsg">
@@ -7,7 +7,12 @@
         </div>
     @endif
 
-    {!! $chapterContent !!}
+    <div class="absolute top-2 right-4 pl-2 pr-1 py-2 rounded-full font-bold cursor-pointer bg-pink-500 hover:bg-pink-600 text-yellow-300" title="Edit">
+        <i class="fa fa-edit fa-2x" wire:click="editTheContent"></i>
+    </div>
+
+    <div class="">{!! $chapterContent !!}</div>
+
 </div>
 
 @section('content_header')
