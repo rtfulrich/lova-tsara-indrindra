@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
-use App\Providers\RouteServiceProvider;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -25,12 +25,13 @@ class Login extends Component
         ]);
 
         if (!Auth::attempt($credentials, $this->remember)) {
-            $this->addError('email', trans('auth.failed'));
-
+            $this->addError('email', 'Email na tenimiafina diso');
+            // $this->addError('email', trans('auth.failed'));
             return;
-        } else {
-            if (Auth::user()->role === "superadmin") return redirect()->route('admin.dashboard');
         }
+
+        $user = User::find(Auth::user()->id);
+        if ($user->hasRole('superadmin')) return redirect()->route('admin.dashboard');
 
         redirect(route('home'));
     }

@@ -3,17 +3,29 @@
 use Illuminate\Support\Facades\Route;
 // ---------------------------------------------------------------------- //
 
-Route::livewire('/', 'website.welcome')
+Route::livewire('/', 'website.pages.home')
     ->layout('layouts.app')
     ->section('content')
     ->name('home');
 
 Route::middleware('guest')->group(function () {
-    Route::view('login', 'auth.login')->name('login');
-    // Route::livewire('/login', 'auth.login')->name('login')->layout('layouts.auth')->section('body', ['title' => 'login is title']);
-    Route::view('register', 'auth.register')->name('register');
-    // Route::livewire('/register', 'auth.register')->name('register')->layout('layouts.auth', ['title' => 'Register is title'])->section('body');
+    Route::livewire('login', 'auth.login')
+        ->name('login')
+        ->layout('layouts.app')
+        ->section('content');
+    Route::livewire('register', 'auth.register')
+        ->name('register')
+        ->layout('layouts.app')
+        ->section('content');
 });
+Route::livewire('/language/javascript', 'website.pages.specific-language-category')
+    ->name('language-category')
+    ->layout('layouts.app')
+    ->section('content');
+Route::livewire('/course/learn-javascript-from-scratch-a1efd3', 'website.pages.course-item-content')
+    ->name('course.content')
+    ->layout('layouts.app')
+    ->section('content');
 
 Route::view('password/reset', 'auth.passwords.email')->name('password.request');
 Route::get('password/reset/{token}', 'Auth\PasswordResetController')->name('password.reset');
@@ -33,11 +45,11 @@ Route::middleware(['auth'])->group( function() {
         Route::prefix('/admin')->group( function () {
             Route::get('/', fn() => redirect()->route('admin.dashboard'));
     
-            // Route::livewire('/dashboard', 'admin.dashboard')
-            //     ->name('dashboard')
-            //     ->layout('adminlte::page')
-            //     ->section('content');
-            Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+            Route::livewire('/dashboard', 'admin.dashboard')
+                ->name('dashboard')
+                ->layout('adminlte::page')
+                ->section('content');
+            // Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
             // Route::livewire('/course/create', 'admin.new-course')
             //     ->name('new-course')
             //     ->layout('adminlte::page', ['ckeditor' => true])

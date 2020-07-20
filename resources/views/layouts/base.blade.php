@@ -16,17 +16,21 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
         @livewireStyles
         @yield('css')
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <script src="{{ mix('js/app.js') }}"></script>
+        
     </head>
 
     <body>
         @yield('body')
 
-        <script src="{{ mix('js/app.js') }}"></script>
         @livewireScripts
         @yield('js')
         

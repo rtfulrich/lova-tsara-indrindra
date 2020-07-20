@@ -1,0 +1,9 @@
+.custom-right-sidebar-height {
+    height: calc(100vh - 3rem);
+}
+@media screen and (min-width: 768px) {
+    .custom-right-sidebar-height {
+        height: calc(100vh - 4rem);
+    }
+}
+

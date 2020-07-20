@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Auth;
 
-use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,15 +22,26 @@ class Register extends Component
     public function register()
     {
         $this->validate([
-            'username' => ['required'],
+            'username' => ['required', 'min:4', 'alpha_dash'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'min:8', 'same:passwordConfirmation'],
+        ], [
+            '*.required' => 'Tsimaintsy fenoina ny :attribute',
+            'username.alpha_dash' => 'Litera , digita sy - ary _ ihany no azo ampiasaina',
+            '*.min' => ':min karàka farafakely ny :attribute',
+            'email.email' => 'Tsy marina ny email nomenao',
+            'email.unique' => 'Efa voampiasa ny email nomenao',
+            'password.same' =>  'Tsy mitovy ny teny miafina roa nomenao'
+        ], [
+            'username' => 'anarasafidy',
+            'password' => 'tenimiafina'
         ]);
-            // dd($this->username, $this->email, $this->password);
+        
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->password = Hash::make($this->password);
+        $user->roles = ['student'];
         $user->save();
 
         $user->sendEmailVerificationNotification();
