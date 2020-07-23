@@ -18,6 +18,21 @@ nav.show-sidebar-menu {
     background: transparent;
 }
 
+.bg-333 {
+    background: #333;
+    transition: background ease-in-out 200ms;
+}
+.bg-333:hover {
+    background: #374151;
+}
+.bg-333-inverse {
+    background: #374151;
+    transition: background ease-in-out 200ms;
+}
+.bg-333-inverse:hover {
+    background: #333;
+}
+
 @media screen and (min-width: 1024px) {
     nav {
         transition: none;

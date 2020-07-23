@@ -15,4 +15,8 @@ class CourseChapter extends Model
         return $this->hasMany(ChapterContent::class);
     }
 
+    public function groupChapter() {
+        return $this->belongsTo(GroupChapter::class);
+    }
+
 }

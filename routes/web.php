@@ -22,7 +22,7 @@ Route::livewire('/language/javascript', 'website.pages.specific-language-categor
     ->name('language-category')
     ->layout('layouts.app')
     ->section('content');
-Route::livewire('/course/learn-javascript-from-scratch-a1efd3', 'website.pages.course-item-content')
+Route::livewire('/{slug}_{hexId}', 'website.pages.course-item-content')
     ->name('course.content')
     ->layout('layouts.app')
     ->section('content');
@@ -68,6 +68,12 @@ Route::middleware(['auth'])->group( function() {
                 ->name('course.chapter.store-content');
             Route::put('/chapter/{id}/update-content', 'Admin\LarabergController@updateChapterContent')
                 ->name('course.chapter.update-content');
+            Route::put('/course/{id}/update-description', 'Admin\LarabergController@updateCourseDescription')
+                ->name('course.updateDescription');
+            Route::livewire('/course/{id}/show-description', 'admin.show-course-description')
+                ->name('course.showDescription')
+                ->layout('adminlte::page')
+                ->section('content');
 
             Route::livewire('/chapter/{id}', 'admin.show-chapter-content')
                 ->name('course.chapter.show-content')
@@ -83,9 +89,3 @@ Route::group(
         \UniSharp\LaravelFilemanager\Lfm::routes();
     }
 );
-
-
-
-Route::get('phpinfo', function() {
-    phpinfo();
-});
