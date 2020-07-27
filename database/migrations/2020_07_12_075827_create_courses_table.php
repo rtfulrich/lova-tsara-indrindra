@@ -21,6 +21,7 @@ class CreateCoursesTable extends Migration
             $table->boolean('use_group_chapters')->default(true);
             $table->enum('category', ['formation', 'tutorial', 'practice'])->default('practice');
             $table->string('image')->nullable();
+            $table->text('pre_description')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('author');
             

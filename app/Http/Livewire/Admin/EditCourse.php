@@ -23,6 +23,7 @@ class EditCourse extends Component
     public $courseLevel;
     public $courseImage = null;
     public $courseDescription;
+    public $coursePreDescription;
     public $isCoursePublished;
     public $useGroupOfChapters;
 
@@ -35,6 +36,7 @@ class EditCourse extends Component
     public $newGroupOfChaptersNumber = "";
     public $newGroupOfChaptersTitle = "";
     public $newCourseImage = null;
+    public $newCoursePredescription = "";
 
     public $groupChapterIdToBeAdded = null;
     public $groupChapterIdToBeRemoved = null;
@@ -61,8 +63,11 @@ class EditCourse extends Component
             $this->courseLevel = $this->course->level;
             $this->courseImage = $this->course->image;
             $this->courseDescription = $this->course->description;
+            $this->coursePreDescription = $this->course->pre_description;
             $this->isCoursePublished = $this->course->published;
             $this->useGroupOfChapters = $this->course->use_group_chapters;
+
+            $this->newCoursePredescription = $this->coursePreDescription;
 
             foreach ($this->course->courseChapters as $chapter) {
                 $this->chapters[] = collect($chapter)->except(['created_at', 'updated_at']);
@@ -73,6 +78,16 @@ class EditCourse extends Component
                     ->put('chapters', collect($groupChapter->courseChapters)->toArray());
             }
             // dd($this->groupOfChapters);
+        }
+
+        public function updateCoursePredescription() {
+            if (trim($this->newCoursePredescription) === "") return;
+            if ($this->newCoursePredescription === $this->coursePreDescription) return;
+            $this->course->pre_description = $this->newCoursePredescription;
+            $this->course->save();
+
+            $this->coursePreDescription = $this->course->pre_description;
+            $this->newCoursePredescription = $this->coursePreDescription;
         }
 
         public function changeCourseImage() {

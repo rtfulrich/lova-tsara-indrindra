@@ -9,23 +9,15 @@ Route::livewire('/', 'website.pages.home')
     ->name('home');
 
 Route::middleware('guest')->group(function () {
-    Route::livewire('login', 'auth.login')
+    Route::livewire('hisera', 'auth.login')
         ->name('login')
         ->layout('layouts.app')
         ->section('content');
-    Route::livewire('register', 'auth.register')
+    Route::livewire('hisoratra', 'auth.register')
         ->name('register')
         ->layout('layouts.app')
         ->section('content');
 });
-Route::livewire('/language/javascript', 'website.pages.specific-language-category')
-    ->name('language-category')
-    ->layout('layouts.app')
-    ->section('content');
-Route::livewire('/{slug}_{hexId}', 'website.pages.course-item-content')
-    ->name('course.content')
-    ->layout('layouts.app')
-    ->section('content');
 
 Route::view('password/reset', 'auth.passwords.email')->name('password.request');
 Route::get('password/reset/{token}', 'Auth\PasswordResetController')->name('password.reset');
@@ -49,11 +41,10 @@ Route::middleware(['auth'])->group( function() {
                 ->name('dashboard')
                 ->layout('adminlte::page')
                 ->section('content');
-            // Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
-            // Route::livewire('/course/create', 'admin.new-course')
-            //     ->name('new-course')
-            //     ->layout('adminlte::page', ['ckeditor' => true])
-            //     ->section('content');
+            Route::livewire('/my-courses', 'admin.my-courses')
+                ->name('my-courses')
+                ->layout('adminlte::page')
+                ->section('content');
             Route::get('/course/create', 'Admin\Courses\CourseController@create')->name('course.create');
             Route::livewire('/course/{id}', 'admin.edit-course')
                 ->name('course.edit')
@@ -89,3 +80,25 @@ Route::group(
         \UniSharp\LaravelFilemanager\Lfm::routes();
     }
 );
+
+/* --------------- WEBSITE ------------------ */
+Route::livewire('/fiofanana', 'website.pages.latest-courses')
+    ->name('latest-courses')
+    ->layout('layouts.app')
+    ->section('content');
+Route::livewire('/tuto', 'website.pages.latest-tutorials')
+    ->name('latest-tutorials')
+    ->layout('layouts.app')
+    ->section('content');
+Route::livewire('/{hashTag}', 'website.pages.specific-language-category')
+    ->name('specific-hashtag')
+    ->layout('layouts.app')
+    ->section('content');
+Route::livewire('/{hashTag}/{slug}', 'website.pages.course-item-content')
+    ->name('course.content')
+    ->layout('layouts.app')
+    ->section('content');
+Route::livewire('/web/{hashTag}/{courseSlug}/{chapterSlug}', 'website.pages.course-chapter-item-content')
+    ->name('course.chapter.content')
+    ->layout('layouts.app')
+    ->section('content');

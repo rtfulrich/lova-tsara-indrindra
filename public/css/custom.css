@@ -9,13 +9,16 @@ nav.show-sidebar-menu {
     width: 18rem;
     transform: translateX(0);
 }
+nav#nav-menu {
+    overflow-y: auto;
+}
 
 .menu-item {
     background: #333;
     transition: background ease-in-out 200ms;
 }
 .menu-item:hover {
-    background: transparent;
+    background: #242424;
 }
 
 .bg-333 {
@@ -33,6 +36,35 @@ nav.show-sidebar-menu {
     background: #333;
 }
 
+.social-link {
+    transition: all ease-in-out 200ms;
+}
+.social-link:hover {
+    transform: rotateZ(360deg);
+    transform: scale(1.5);
+}
+.facebook:hover {
+    color: #3b5998;
+}
+.youtube:hover {
+    color: rgb(218, 21, 21);
+}
+.phone:hover {
+    color: white;
+}
+.google:hover {
+    color: rgb(218, 21, 21);
+}
+.github:hover {
+    color: white;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 @media screen and (min-width: 1024px) {
     nav {
         transition: none;
@@ -40,5 +72,14 @@ nav.show-sidebar-menu {
     nav.hide-sidebar-menu , nav.show-sidebar-menu {
         width: 18rem;
         transform: translateX(0);
+    }
+    nav#nav-menu {
+        overflow-y: hidden;
+    }
+    nav#nav-menu:hover {
+        overflow-y: auto;
+    }
+    .footer {
+        width: calc(100% - 18rem);
     }
 }

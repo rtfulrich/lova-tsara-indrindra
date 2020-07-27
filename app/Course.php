@@ -8,15 +8,19 @@ class Course extends Model
 {
     
     public function courseChapters() {
-        return $this->hasMany(CourseChapter::class);
+        return $this->hasMany(CourseChapter::class, 'course_id');
     }
 
     public function groupChapters() {
         return $this->hasMany(GroupChapter::class);
     }
 
-    public function author() {
-        return $this->belongsTo(User::class, 'author');
+    public function comments() {
+        return $this->hasMany(CourseComment::class);
+    }
+
+    public function owner() {
+        return $this->belongsTo(User::class, 'author', 'id');
     }
 
     public function users() {

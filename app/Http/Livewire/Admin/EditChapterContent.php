@@ -10,20 +10,21 @@ use Livewire\Component;
 class EditChapterContent extends Component
 {
     public $pageTitle;
+    public $chapter;
     public $chapterTitle;
     public $chapterId;
     public $chapterContent = null;
     public $alreadyExists = false;
-    public $textContent; 
+    public $textContent;
 
     public $showAddContentForm = false;
 
     // --------------------- PROCESS METHODS ---------------------
     public function mount(int $id) {
-        $this->chapterId = $id;
-        $courseChapter = CourseChapter::findOrFail($id);
-        $this->chapterTitle = $courseChapter->title;
-        $this->pageTitle = "$this->chapterTitle - {$courseChapter->course->title}";
+        $this->chapter = CourseChapter::findOrFail($id);
+        $this->chapterId = $this->chapter->id;
+        $this->chapterTitle = $this->chapter->title;
+        $this->pageTitle = "$this->chapterTitle - {$this->chapter->course->title}";
 
         $chapterContentCollection = ChapterContent::where('chapter_id', $id)->first('content');
         if ($chapterContentCollection !== null) 

@@ -113,7 +113,7 @@
 
                     </div>
 
-                    <div class="pb-2">
+                    <div class="pb-2 border-b">
                         <label class="block uppercase tracking-wide font-bold mb-2">
                             Course Image :
                         </label>
@@ -149,6 +149,14 @@
                         </form>    
                     </div>
     
+                    <div class="pb-2 mb-2">
+                        <label class="block uppercase tracking-wide font-bold mb-2">
+                            Course Pre-Description :
+                        </label>
+                        <textarea wire:model.lazy="newCoursePredescription" rows="4" class="w-full rounded-lg bg-gray-200 focus:bg-white p-2 text-black">{{ $coursePreDescription }}</textarea>
+                        <button class="px-2 py-1 rounded-lg focus:outline-none mt-2 float-right bg-gray-400 hover:bg-gray-500 font-bold mb-2" wire:click="updateCoursePredescription">Update Course Predescription</button>
+                    </div>
+                    
                 </div>
             </div>
         @else
@@ -236,59 +244,6 @@
         </div>
     @endif
 
-    {{-- <table class="table-auto w-full mb-4 border-2 border-black">
-        <thead>
-            <tr class="border-b-2 border-t-2 border-black text-center pb-4 text-lg">
-                <th class="w-1/4 border-l-2 border-r-2 border-black">Number</th>
-                <th class="w-2/4 border-r-2 border-black">Title</th>
-                <th class="w-48 border-r-2 border-black">Actions </th>
-                @if (!$showAddChapterForm)
-                    <th class="w-24"><i class="fas fa-plus font-bold rounded px-2 mx-2 mb-2 py-1 bg-yellow-300 hover:bg-yellow-400 cursor-pointer" wire:click="showAddChapterForm" title="Add New Chapter"></i></th>
-                @endif
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($chapters as $chapter) 
-            <tr class="hover:bg-cool-gray-300 text-center font-bold @if ($chapterToEditTitle === $chapter['title']) bg-gray-300 @endif">
-                <td>
-                    @if ($chapterToEditNumber === null)
-                        {{ $chapter['number'] }}
-                        <i class="fa fa-edit text-blue-500 hover:text-blue-600 cursor-pointer mx-2" wire:click="editChapterNumber({{ $chapter['id'] }})"></i>
-                    @elseif ($chapterToEditNumber === $chapter['number'])
-                        {{ $chapter['number'] }}
-                        <input type="text" wire:model="newChapterNumber" class="bg-dark font-bold px-2 py-1 text-center rounded ml-2" autofocus>
-                        <i class="fa fa-save text-blue-500 hover-text-blue-600 cursor-pointer mx-2" wire:click="handleUpdateChapterNumber({{ $chapter['id'] }})"></i>
-                        <i class="fa fa-window-close text-red-500 hover-text-red-600 cursor-pointer mx-2" wire:click="cancelEditChapter"></i>
-                    @else
-                        {{ $chapter['number'] }}
-                        <i class="fa fa-edit text-blue-500 hover:text-blue-600 cursor-pointer mx-2" wire:click="editChapterNumber({{ $chapter['id'] }})"></i>
-                    @endif
-                </td>
-                <td>
-                    @if ($chapterToEditTitle === null)
-                        {{ $chapter['title'] }}
-                        <i class="fa fa-edit text-blue-500 hover:text-blue-600 cursor-pointer mx-2" wire:click="editChapterTitle({{ $chapter['id'] }})"></i>
-                    @elseif ($chapterToEditTitle === $chapter['title'])
-                        <div class="mt-1 flex justify-center">
-                            <input type="text" wire:model="newChapterTitle" class="w-3/4 bg-dark font-bold px-2 py-1 text-center rounded" value="{{ $chapter['title'] }}">
-                            <i class="fa fa-save text-blue-500 hover-text-blue-600 cursor-pointer mx-2 mt-2" wire:click="handleUpdateChapterTitle({{ $chapter['id'] }})"></i>
-                            <i class="fa fa-window-close text-red-500 hover-text-red-600 cursor-pointer mx-2 mt-2" wire:click="cancelEditChapter"></i>
-                        </div>
-                        <div>
-                            {{ $chapter['title'] }}
-                        </div>
-                    @else
-                        {{ $chapter['title'] }}
-                        <i class="fa fa-edit text-blue-500 hover:text-blue-600 cursor-pointer mx-2" wire:click="editChapterTitle({{ $chapter['id'] }})"></i>
-                    @endif
-                </td>
-                <td class="flex justify-center my-1">
-                    <i class="fas fa-edit fa-2x text-green-500 cursor-pointer hover:text-green-600 mx-2" title="Edit Chapter Content" wire:click="editChapterContent({{ $chapter['id'] }})"></i>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table> --}}
     <div class="mb-20">
         @foreach ($groupOfChapters as $groupOfChapterItem)
             <table class="table-auto w-full mb-4 border-2 border-black">
@@ -386,8 +341,10 @@
     <script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js"></script>
     <script src="{{ asset('vendor/laraberg/js/laraberg.js') }}"></script>
     <script>
-        Laraberg.init('course-description', { laravelFilemanager: {
-            prefix: '/lti-course-filemanager'
-        }, sidebar: true });
+        (function() {
+            Laraberg.init('course-description', { laravelFilemanager: {
+                prefix: '/lti-course-filemanager'
+            }, sidebar: true });
+        }) ();
     </script>
 @endpush

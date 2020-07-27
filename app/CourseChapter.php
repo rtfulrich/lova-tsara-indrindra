@@ -11,12 +11,16 @@ class CourseChapter extends Model
         return $this->belongsTo(Course::class, 'course_id');
     }
 
-    public function chapterContents() {
-        return $this->hasMany(ChapterContent::class);
+    public function content() {
+        return $this->hasOne(ChapterContent::class, 'chapter_id');
     }
 
     public function groupChapter() {
         return $this->belongsTo(GroupChapter::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(CourseComment::class, 'chapter_id');
     }
 
 }

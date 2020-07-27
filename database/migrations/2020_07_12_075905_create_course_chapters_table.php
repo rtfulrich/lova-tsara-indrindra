@@ -20,7 +20,7 @@ class CreateCourseChaptersTable extends Migration
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('group_chapter_id')->nullable();
 
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->timestamps();
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');

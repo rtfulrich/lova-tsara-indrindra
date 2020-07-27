@@ -1,4 +1,8 @@
 <div>
+
+    <div class="fixed bottom-2 right-2" style="z-index: 1000">
+        <a href="{{ route('admin.course.edit', $chapter->course->id) }}" class="px-2 py-1 rounded-lg bg-blue-500 hover:bg-blue-600 font-bold text-white">Edit Course Owner</a>
+    </div>
     
     <form action="{{ $alreadyExists ? 
         route('admin.course.chapter.update-content', $chapterId) : 

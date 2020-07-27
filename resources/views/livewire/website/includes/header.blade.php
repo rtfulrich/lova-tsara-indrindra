@@ -1,6 +1,6 @@
 <header 
-    style="background: #242424"
-    class="fixed w-full z-50 md:pr-8 md:pl-8 px-4 md:h-16 h-12 flex justify-between items-center text-white"
+    style="background: #242424; z-index: 80"
+    class="fixed w-full md:pr-8 md:pl-8 px-4 md:h-16 h-12 flex justify-between items-center text-white"
 >
     <div class="flex items-center">
         <span id="menu-control" class="lg:hidden" {{--wire:click="$emitTo('website.includes.right-sidebar', 'showSideBarMenu')"--}}><i class="fa fa-bars text-xl mr-4 cursor-pointer"></i></span>

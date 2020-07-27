@@ -38,6 +38,14 @@ class User extends Authenticatable
         'roles' => 'array'
     ];
 
+    public function courseComments() {
+        return $this->hasMany(CourseComment::class, 'author');
+    }
+
+    public function commentReplies() {
+        return $this->hasMany(CourseCommentReply::class, 'author');
+    }
+
     public function ownCourses() {
         return $this->hasMany(Course::class, 'author');
     }

@@ -1,4 +1,4 @@
-<div class="p-4 bg-cool-gray-900 border-2 border-gray-700 mb-4 rounded-lg font-sans text-gray-400">
+<div class="p-4 bg-black border-2 border-gray-700 mb-4 rounded-lg font-sans text-gray-400">
 
     @if (session()->has('msg') and $showFlashMsg)
         <div class="absolute top-0 right-0 p-4 bg-yellow-500 rounded z-50 font-bold text-lg cursor-pointer text-white" wire:click="removeFlashMsg">
